@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .title-font {
+            font-family: 'Dancing Script', cursive;
+        }
+        .heart-bg {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 182, 193, 0.2);
+            animation: float 10s ease-in-out infinite;
+            z-index: -1;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-pink-50 flex items-center justify-center min-h-screen relative overflow-hidden p-4">
+    <!-- Decorações de fundo -->
+    <div class="absolute top-0 left-0 w-full h-full z-0">
+        <span class="heart-bg" style="top: 10%; left: 5%;">🌸</span>
+        <span class="heart-bg" style="top: 20%; left: 80%; font-size: 3rem; animation-delay: 2s;">💖</span>
+        <span class="heart-bg" style="top: 50%; left: 15%; font-size: 1.5rem; animation-delay: 4s;">🌹</span>
+        <span class="heart-bg" style="top: 80%; left: 90%; font-size: 4rem; animation-delay: 1s;">❤️</span>
+        <span class="heart-bg" style="top: 70%; left: 5%; font-size: 2.5rem; animation-delay: 5s;">🌷</span>
+        <span class="heart-bg" style="top: 5%; left: 40%; font-size: 2rem; animation-delay: 3s;">💕</span>
+         <span class="heart-bg" style="top: 90%; left: 50%; font-size: 3rem; animation-delay: 6s;">🌺</span>
+    </div>
+
+    <!-- Container Principal -->
+    <div class="bg-white/80 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center border-2 border-pink-200 relative z-10">
+        
+        <!-- Página Inicial -->
+        <div id="home-container">
+            <h1 class="title-font text-5xl sm:text-6xl text-red-500 mb-2">Cartório do Amor</h1>
+            <p class="text-gray-600 mb-6">Teste seus conhecimentos sobre o amor e romances!</p>
+            <img src="https://i.imgur.com/JyTlzO8.jpeg" 
+                 alt="Imagem de um gato fofo" 
+                 class="rounded-lg shadow-md max-w-sm w-full mx-auto mb-6 max-h-60 sm:max-h-80 object-cover"
+                 onerror="this.onerror=null;this.src='https://placehold.co/600x400/fecdd3/e11d48?text=Amor';">
+            <button id="start-btn" class="bg-red-500 text-white font-bold py-3 px-8 rounded-full hover:bg-red-600 transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-300">
+                Iniciar Quiz
+            </button>
+        </div>
+
+        <!-- Container do Quiz (inicialmente oculto) -->
+        <div id="quiz-container" class="hidden">
+            <h1 class="title-font text-5xl text-red-500 mb-2">Cartório do Amor</h1>
+            <p class="text-gray-600 mb-8">Teste seus conhecimentos sobre seu programa favorito</p>
+
+            <div id="quiz-content">
+                <h2 id="question" class="text-2xl font-semibold text-gray-800 mb-6"></h2>
+                <div id="answers" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- As opções de resposta serão inseridas aqui pelo JavaScript -->
+                </div>
+            </div>
+
+            <div id="result-content" class="hidden">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Quiz Finalizado!</h2>
+                <p id="score" class="text-xl text-gray-600 mb-4"></p>
+                <div id="result-image-container" class="mb-6 flex justify-center">
+                     <!-- A imagem do resultado será inserida aqui -->
+                </div>
+                <button id="restart-btn" class="bg-red-500 text-white font-bold py-3 px-8 rounded-full hover:bg-red-600 transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-300">
+                    Jogar Novamente
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: 'Qual o nome do casal protagonista do filme "Titanic"?',
+                answers: [
+                    { text: "Rose e Jack", correct: true },
+                    { text: "Bella e Edward", correct: false },
+                    { text: "Baby e Johnny", correct: false },
+                    { text: "Allie e Noah", correct: false },
+                ],
+            },
+            {
+                question: 'Quem escreveu a famosa peça de teatro "Romeu e Julieta"?',
+                answers: [
+                    { text: "Machado de Assis", correct: false },
+                    { text: "William Shakespeare", correct: true },
+                    { text: "Charles Dickens", correct: false },
+                    { text: "Jane Austen", correct: false },
+                ],
+            },
+            {
+                question: 'Em qual cidade se passa o filme "Diário de uma Paixão"?',
+                answers: [
+                    { text: "Nova York, NY", correct: false },
+                    { text: "Paris, França", correct: false },
+                    { text: "Seabrook, SC", correct: true },
+                    { text: "Verona, Itália", correct: false },
+                ],
+            },
+            {
+                question: 'Qual é o símbolo universalmente reconhecido do amor?',
+                answers: [
+                    { text: "Uma pomba branca", correct: false },
+                    { text: "Uma estrela cadente", correct: false },
+                    { text: "Duas alianças", correct: false },
+                    { text: "Um coração", correct: true },
+                ],
+            },
+            {
+                question: 'Qual deus romano é o equivalente ao deus grego Eros, o deus do amor?',
+                answers: [
+                    { text: "Júpiter", correct: false },
+                    { text: "Apolo", correct: false },
+                    { text: "Cupido", correct: true },
+                    { text: "Mercúrio", correct: false },
+                ],
+            },
+        ];
+
+        // Elementos do DOM
+        const homeContainer = document.getElementById('home-container');
+        const quizContainer = document.getElementById('quiz-container');
+        const quizContent = document.getElementById('quiz-content');
+        const resultContent = document.getElementById('result-content');
+        const questionEl = document.getElementById('question');
+        const answersEl = document.getElementById('answers');
+        const scoreEl = document.getElementById('score');
+        const resultImageContainer = document.getElementById('result-image-container');
+        
+        const startBtn = document.getElementById('start-btn');
+        const restartBtn = document.getElementById('restart-btn');
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Função para iniciar o quiz
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            resultImageContainer.innerHTML = ''; // Limpa a imagem anterior ao reiniciar
+            quizContent.classList.remove('hidden');
+            resultContent.classList.add('hidden');
+            homeContainer.classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+            showQuestion();
+        }
+
+        // Função para mostrar a pergunta atual
+        function showQuestion() {
+            resetState();
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionEl.innerText = currentQuestion.question;
+
+            currentQuestion.answers.forEach(answer => {
+                const button = document.createElement('button');
+                button.innerText = answer.text;
+                button.classList.add('w-full', 'bg-white', 'text-pink-500', 'font-semibold', 'py-3', 'px-4', 'border-2', 'border-pink-300', 'rounded-full', 'hover:bg-pink-100', 'transition', 'duration-300');
+                if (answer.correct) {
+                    button.dataset.correct = answer.correct;
+                }
+                button.addEventListener('click', selectAnswer);
+                answersEl.appendChild(button);
+            });
+        }
+        
+        // Função para limpar o estado anterior (respostas)
+        function resetState() {
+            while (answersEl.firstChild) {
+                answersEl.removeChild(answersEl.firstChild);
+            }
+        }
+
+        // Função para lidar com a seleção de uma resposta
+        function selectAnswer(e) {
+            const selectedBtn = e.target;
+            const isCorrect = selectedBtn.dataset.correct === 'true';
+
+            if (isCorrect) {
+                score++;
+                selectedBtn.classList.remove('bg-white', 'border-pink-300', 'hover:bg-pink-100');
+                selectedBtn.classList.add('bg-green-400', 'border-green-500', 'text-white');
+            } else {
+                selectedBtn.classList.remove('bg-white', 'border-pink-300', 'hover:bg-pink-100');
+                selectedBtn.classList.add('bg-red-400', 'border-red-500', 'text-white');
+            }
+            
+            // Mostra a resposta correta se o usuário errar
+            Array.from(answersEl.children).forEach(button => {
+                if (button.dataset.correct === 'true' && !isCorrect) {
+                     button.classList.remove('bg-white', 'border-pink-300', 'hover:bg-pink-100');
+                     button.classList.add('bg-green-400', 'border-green-500', 'text-white');
+                }
+                button.disabled = true; // Desabilita todos os botões
+            });
+
+            // Vai para a próxima pergunta após um breve intervalo
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizData.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 1500);
+        }
+
+        // Função para mostrar o resultado final
+        function showResult() {
+            quizContent.classList.add('hidden');
+            resultContent.classList.remove('hidden');
+            scoreEl.innerText = `Você acertou ${score} de ${quizData.length} perguntas!`;
+            
+            // Cria o elemento da imagem
+            const img = document.createElement('img');
+            img.classList.add('rounded-lg', 'shadow-md', 'max-w-xs', 'w-full', 'mx-auto');
+            
+            // Verifica a pontuação para definir a imagem
+            if (score === quizData.length) {
+                img.src = 'https://i.imgur.com/O4fhKxr.jpeg';
+                img.alt = 'Imagem de um pato comemorando a pontuação perfeita';
+                scoreEl.innerText += ' Perfeito! Aqui está seu prêmio!';
+            } else {
+                img.src = 'https://i.imgur.com/SPht4FN.jpeg';
+                img.alt = 'Imagem de um elefante como prêmio de consolação';
+                scoreEl.innerText += ' Quase lá! Aqui está um prêmio de consolação.';
+            }
+            
+            // Adiciona um fallback caso a imagem não carregue
+            img.onerror = function() {
+                this.alt = 'A imagem não pôde ser carregada.';
+                this.src='https://placehold.co/400x300/fecdd3/e11d48?text=Prêmio!';
+            };
+
+            // Adiciona a imagem ao container
+            resultImageContainer.appendChild(img);
+        }
+
+        // Event listeners para os botões
+        startBtn.addEventListener('click', startQuiz);
+        restartBtn.addEventListener('click', startQuiz);
+
+    </script>
+</body>
+</html>
