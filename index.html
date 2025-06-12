@@ -45,7 +45,7 @@
         <!-- Página Inicial -->
         <div id="home-container">
             <h1 class="title-font text-5xl sm:text-6xl text-red-500 mb-2">Cartório do Amor</h1>
-            <p class="text-gray-600 mb-6">Teste seus conhecimentos sobre o amor e romances!</p>
+            <p class="text-gray-600 mb-6">Teste seus conhecimentos sobre o programa!</p>
             <img src="https://i.imgur.com/JyTlzO8.jpeg" 
                  alt="Imagem de um gato fofo" 
                  class="rounded-lg shadow-md max-w-sm w-full mx-auto mb-6 max-h-60 sm:max-h-80 object-cover"
@@ -58,7 +58,7 @@
         <!-- Container do Quiz (inicialmente oculto) -->
         <div id="quiz-container" class="hidden">
             <h1 class="title-font text-5xl text-red-500 mb-2">Cartório do Amor</h1>
-            <p class="text-gray-600 mb-8">Teste seus conhecimentos sobre seu programa favorito</p>
+            <p class="text-gray-600 mb-8">Resposta óbvia</p>
 
             <div id="quiz-content">
                 <h2 id="question" class="text-2xl font-semibold text-gray-800 mb-6"></h2>
@@ -83,48 +83,48 @@
     <script>
         const quizData = [
             {
-                question: 'Qual o nome do casal protagonista do filme "Titanic"?',
+                question: 'Quem é a operadora de câmera mais linda e com os melhores enquadramentos? (ta certo a palavra?)',
                 answers: [
-                    { text: "Rose e Jack", correct: true },
-                    { text: "Bella e Edward", correct: false },
-                    { text: "Baby e Johnny", correct: false },
-                    { text: "Allie e Noah", correct: false },
+                    { text: "Marina Montejano", correct: true },
+                    { text: "Outra pessoa", correct: false },
+                    { text: "Ninguém", correct: false },
+                    { text: "Não sei de nada", correct: false },
                 ],
             },
             {
-                question: 'Quem escreveu a famosa peça de teatro "Romeu e Julieta"?',
+                question: 'Quem é a cenografista mais perfeita e criativa?',
                 answers: [
-                    { text: "Machado de Assis", correct: false },
-                    { text: "William Shakespeare", correct: true },
-                    { text: "Charles Dickens", correct: false },
-                    { text: "Jane Austen", correct: false },
+                    { text: "Sei lá", correct: false },
+                    { text: "Marina Montejano", correct: true },
+                    { text: "Bolsonaro", correct: false },
+                    { text: "Lula", correct: false },
                 ],
             },
             {
-                question: 'Em qual cidade se passa o filme "Diário de uma Paixão"?',
+                question: 'Quem é a figurinista mais foda?',
                 answers: [
-                    { text: "Nova York, NY", correct: false },
-                    { text: "Paris, França", correct: false },
-                    { text: "Seabrook, SC", correct: true },
-                    { text: "Verona, Itália", correct: false },
+                    { text: "Alguem da globolixo", correct: false },
+                    { text: "Nao entendo nada disso", correct: false },
+                    { text: "Marina Montejano", correct: true },
+                    { text: "Pão de Queijo", correct: false },
                 ],
             },
             {
-                question: 'Qual é o símbolo universalmente reconhecido do amor?',
+                question: 'Quem é a diretora de fotografia mais competente?',
                 answers: [
-                    { text: "Uma pomba branca", correct: false },
-                    { text: "Uma estrela cadente", correct: false },
-                    { text: "Duas alianças", correct: false },
-                    { text: "Um coração", correct: true },
+                    { text: "Zé Ninguém", correct: false },
+                    { text: "Outra pessoa", correct: false },
+                    { text: "Não sei", correct: false },
+                    { text: "Marina Montejano", correct: true },
                 ],
             },
             {
-                question: 'Qual deus romano é o equivalente ao deus grego Eros, o deus do amor?',
+                question: 'Qual a diretora de arte mais artística?',
                 answers: [
-                    { text: "Júpiter", correct: false },
-                    { text: "Apolo", correct: false },
-                    { text: "Cupido", correct: true },
-                    { text: "Mercúrio", correct: false },
+                    { text: "Chico Buarque", correct: false },
+                    { text: "Bethoven", correct: false },
+                    { text: "Marina Montejano", correct: true },
+                    { text: "Seu jorge", correct: false },
                 ],
             },
         ];
@@ -229,11 +229,11 @@
             // Verifica a pontuação para definir a imagem
             if (score === quizData.length) {
                 img.src = 'https://i.imgur.com/O4fhKxr.jpeg';
-                img.alt = 'Imagem de um pato comemorando a pontuação perfeita';
-                scoreEl.innerText += ' Perfeito! Aqui está seu prêmio!';
+                img.alt = 'Imagem de uma marina comemorando a pontuação perfeita';
+                scoreEl.innerText += ' Parabéns! Você sabe das coisas!';
             } else {
                 img.src = 'https://i.imgur.com/SPht4FN.jpeg';
-                img.alt = 'Imagem de um elefante como prêmio de consolação';
+                img.alt = 'Imagem de um presidente como prêmio de consolação';
                 scoreEl.innerText += ' Quase lá! Aqui está um prêmio de consolação.';
             }
             
